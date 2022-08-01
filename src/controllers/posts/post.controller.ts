@@ -3,6 +3,7 @@ import { Application, Request, Response } from 'express';
 import BaseApi from '../../utils/BaseApi';
 import { BodyValidator } from '../../utils/BodyValidator';
 import { CreatePostDTO } from './posts.dto';
+import { defaultRateLimitter, RateLimitter } from '../../middlewares/rate-limmiter';
 
 interface Post {
   id: number;
@@ -24,6 +25,7 @@ export class PostController extends BaseApi {
     this.router.post('/', CreatePostDTO(), this.addPosts);
   }
 
+  @RateLimitter(defaultRateLimitter)
   public getPosts(_req: Request, _res: Response) {
     return ResponseBuilder.successResponse(_res, posts);
   }

@@ -94,3 +94,21 @@ export class NotFoundError extends CustomError {
     ];
   }
 }
+
+export class TooManyRequests extends CustomError {
+  statusCode = 429;
+  reason = 'Too Many Requests';
+  constructor(message?: string) {
+    super(message || '');
+    this.reason = message || this.reason;
+    Object.setPrototypeOf(this, TooManyRequests.prototype);
+  }
+
+  public serializeErrors() {
+    return [
+      {
+        message: this.reason
+      }
+    ];
+  }
+}
