@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { CustomError } from "../utils/execptions";
+import { Request, Response, NextFunction } from 'express';
+import { CustomError } from '../utils/execptions';
 
 export const errorHandler = (_err: Error, _req: Request, _res: Response, _next: NextFunction) => {
   if (_err instanceof CustomError) {
@@ -11,9 +11,9 @@ export const errorHandler = (_err: Error, _req: Request, _res: Response, _next: 
   return _res.status(500).json({
     errors: [
       {
-        message: "Something went Wrong",
-        field: "",
-      },
-    ],
+        message: 'Something went Wrong',
+        field: ''
+      }
+    ]
   });
 };

@@ -1,4 +1,4 @@
-import { Application, Router } from "express";
+import { Application, Router } from 'express';
 
 export default abstract class BaseApi {
   protected router: Router;

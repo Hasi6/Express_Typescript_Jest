@@ -1,4 +1,4 @@
-import { ValidationError } from "express-validator";
+import { ValidationError } from 'express-validator';
 
 export abstract class CustomError extends Error {
   abstract statusCode: number;
@@ -22,13 +22,13 @@ export class RequestValidationError extends CustomError {
   public serializeErrors() {
     return this.errors.map((err: any) => ({
       message: <string>err.msg,
-      field: <string>err.param,
+      field: <string>err.param
     }));
   }
 }
 
 export class DatabaseConnectionError extends CustomError {
-  reason = "Error connecting to database";
+  reason = 'Error connecting to database';
   statusCode = 500;
   constructor(message: string) {
     super(message);
@@ -38,8 +38,8 @@ export class DatabaseConnectionError extends CustomError {
   public serializeErrors() {
     return [
       {
-        message: this.reason,
-      },
+        message: this.reason
+      }
     ];
   }
 }
@@ -55,8 +55,8 @@ export class BadRequestError extends CustomError {
     return [
       {
         message: this.message,
-        data: this.data || {},
-      },
+        data: this.data || {}
+      }
     ];
   }
 }
@@ -71,17 +71,17 @@ export class UnauthorizedError extends CustomError {
   public serializeErrors() {
     return [
       {
-        message: this.message,
-      },
+        message: this.message
+      }
     ];
   }
 }
 
 export class NotFoundError extends CustomError {
   statusCode = 404;
-  reason = "Route Not Found";
+  reason = 'Route Not Found';
   constructor(message?: string) {
-    super(message || "");
+    super(message || '');
     this.reason = message || this.reason;
     Object.setPrototypeOf(this, NotFoundError.prototype);
   }
@@ -89,8 +89,8 @@ export class NotFoundError extends CustomError {
   public serializeErrors() {
     return [
       {
-        message: this.reason,
-      },
+        message: this.reason
+      }
     ];
   }
 }
