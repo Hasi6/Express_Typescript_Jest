@@ -1,8 +1,8 @@
 import 'express-async-errors';
-import 'dotenv/config';
 import express, { Application, json } from 'express';
 import cors from 'cors';
 import registerRoutes from './routes';
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app: Application = express();
 
@@ -15,3 +15,5 @@ registerRoutes(app);
 app.listen(PORT, () => {
   console.log(`server started at PORT: ${PORT}`);
 });
+
+export default app;
