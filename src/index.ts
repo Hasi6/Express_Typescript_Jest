@@ -53,6 +53,8 @@ const io = new Server(server, {
     origin: '*'
   }
 });
+// @ts-ignore
+global.io = io;
 socket(io);
 
 server.listen(PORT, () => {

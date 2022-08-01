@@ -34,6 +34,8 @@ export class PostController extends BaseApi {
   public addPosts(_req: Request, _res: Response) {
     const body = <Post>_req.body;
     posts = [...posts, { id: posts.length + 1, ...body }];
+    // @ts-ignore
+    global.io.emit(body.title, body);
     return ResponseBuilder.successResponse(_res, posts);
   }
 }
