@@ -8,6 +8,7 @@
     <li>E2E Testing Setup</li>
     <li>ESLint</li>
     <li>Prettier</li>
+    <li>Dockerfile</li>
 </ul>
 
 <h5>Run</h5>
