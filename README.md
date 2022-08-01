@@ -20,7 +20,6 @@
 
 <h5>TODO</h5>
 <ul>
-    <li>SocketIO</li>
     <li>Swagger</li>
     <li>ORM intergration (Prisma/Sequelize/TypeORM)</li>
 </ul>

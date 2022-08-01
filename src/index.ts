@@ -1,5 +1,6 @@
 import 'express-async-errors';
 import express, { Application, json } from 'express';
+import http from 'http';
 import cors from 'cors';
 import { v4 as uuid } from 'uuid';
 import helmet from 'helmet';
@@ -8,14 +9,21 @@ import registerRoutes from './routes';
 import { NotFoundError } from './utils/execptions';
 import { errorHandler } from './middlewares/error-handler';
 import loggerObj from './utils/logger';
+import { socket } from './socket';
+import { Server } from 'socket.io';
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app: Application = express();
+const server = http.createServer(app);
 
 const PORT: string = process.env.PORT || '5000';
 
 app.use(json());
-app.use(cors());
+app.use(
+  cors({
+    origin: '*'
+  })
+);
 app.use(helmet());
 app.use(logger('dev'));
 
@@ -40,8 +48,14 @@ app.all('*', async () => {
 });
 
 app.use(errorHandler);
+const io = new Server(server, {
+  cors: {
+    origin: '*'
+  }
+});
+socket(io);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`server started at PORT: ${PORT}`);
 });
 
