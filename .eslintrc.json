@@ -13,6 +13,7 @@
   "rules": {
     "semi": "off",
     "space-before-function-paren": "off",
-    "no-new": "off"
+    "no-new": "off",
+    "indent": "off"
   }
 }

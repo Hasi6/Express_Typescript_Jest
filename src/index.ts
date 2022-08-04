@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import 'express-async-errors';
 import express, { Application, json } from 'express';
 import http from 'http';
@@ -11,6 +12,7 @@ import { errorHandler } from './middlewares/error-handler';
 import loggerObj from './utils/logger';
 import { socket } from './socket';
 import { Server } from 'socket.io';
+import connection from './data';
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app: Application = express();
@@ -57,8 +59,14 @@ const io = new Server(server, {
 global.io = io;
 socket(io);
 
-server.listen(PORT, () => {
-  console.log(`server started at PORT: ${PORT}`);
+server.listen(PORT, async () => {
+  try {
+    await connection.sync();
+    console.log(`server started at PORT: ${PORT}`);
+    console.log('Connected to the Database');
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 export default app;
