@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Post } from './post';
+import { Post } from '@data/post';
 
 const connection = new Sequelize({
   dialect: 'sqlite',

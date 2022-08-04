@@ -1,18 +1,19 @@
 import 'reflect-metadata';
 import 'express-async-errors';
+import 'module-alias/register';
 import express, { Application, json } from 'express';
 import http from 'http';
 import cors from 'cors';
 import { v4 as uuid } from 'uuid';
 import helmet from 'helmet';
 import logger from 'morgan';
-import registerRoutes from './routes';
-import { NotFoundError } from './utils/execptions';
-import { errorHandler } from './middlewares/error-handler';
-import loggerObj from './utils/logger';
+import registerRoutes from '@routes/index';
+import { NotFoundError } from '@utils/execptions';
+import { errorHandler } from '@middlewares/error-handler';
+import loggerObj from '@utils/logger';
 import { socket } from './socket';
 import { Server } from 'socket.io';
-import connection from './data';
+import connection from '@data/index';
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app: Application = express();
