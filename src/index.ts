@@ -1,3 +1,4 @@
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 import 'reflect-metadata';
 import 'express-async-errors';
 import 'module-alias/register';
@@ -14,7 +15,6 @@ import loggerObj from '@utils/logger';
 import { socket } from './socket';
 import { Server } from 'socket.io';
 import connection from '@data/index';
-require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app: Application = express();
 const server = http.createServer(app);
