@@ -17,6 +17,7 @@
       "@data/*": ["src/data/*"],
       "@middlewares/*": ["src/middlewares/*"],
       "@routes/*": ["src/routes/*"],
+      "@entity/*": ["src/entity/*"],
       "@utils/*": ["src/utils/*"]
     }
   },
